@@ -8,12 +8,11 @@ def main():
     game = create_board()
 
     num = 1
-    while not (winner(game)):
+    while not (has_winner(game) or is_tie(game)):
         display_game(game)
         num = take_turn(num, game)
     display_game(game)
     print("Good game. Thanks for playing!")
-
 
 def create_board():
     board = []
@@ -41,7 +40,7 @@ def take_turn(current, board):
     current += 1
     return current
 
-def winner(board):
+def has_winner(board):
     return (board[0] == board[1] == board[2] or
             board[3] == board[4] == board[5] or
             board[6] == board[7] == board[8] or
@@ -50,6 +49,12 @@ def winner(board):
             board[2] == board[4] == board[6] or
             board[2] == board[5] == board[8] or
             board[1] == board[4] == board[7])
+
+def is_tie(board):
+    for i in range(9):
+        if (board[i] != "x" and board[i] != "o"):
+            return False
+    return True
 
 if __name__ == "__main__":
     main()
